@@ -1,0 +1,35 @@
+<div class="form-container">
+    <form class="edit-form" [formGroup]="campaignForm" (ngSubmit)="saveCampaign()">
+        <h1 *ngIf="campaignId; else createHeader">Edit Campaign</h1>
+        <ng-template #createHeader>
+            <h1>Create New Campaign</h1>
+        </ng-template>
+
+        <div>
+            <label for="campaignName">Name:</label>
+            <input id="campaignName" formControlName="campaignName" />
+        </div>
+        <div>
+            <label for="campaignDescription">Description:</label>
+            <textarea id="campaignDescription" formControlName="campaignDescription"></textarea>
+        </div>
+        <div>
+            <label for="campaignLocation">Location:</label>
+            <input id="campaignLocation" formControlName="campaignLocation" />
+        </div>
+        <div>
+            <label for="campaignCity">City:</label>
+            <input id="campaignCity" formControlName="campaignCity" />
+        </div>
+        <div>
+            <label for="campaignCountry">Country:</label>
+            <input id="campaignCountry" formControlName="campaignCountry" />
+        </div>
+        <div>
+            <label for="campaignGoalAmount">Goal Amount:</label>
+            <input id="campaignGoalAmount" type="number" formControlName="campaignGoalAmount" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">Cancel</button>
+    </form>
+</div>

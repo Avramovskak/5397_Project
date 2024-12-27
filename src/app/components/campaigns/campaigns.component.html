@@ -1,0 +1,70 @@
+<div class="campaign-header">
+    <h1>Fundraising Campaigns</h1>
+    <button class="btn btn-primary" [routerLink]="['/campaign/create']">Create New Campaign</button>
+</div>
+
+<div class="search-container">
+    <input type="text" placeholder="Search campaigns..." [(ngModel)]="searchTerm" (input)="searchCampaigns()" />
+</div>
+
+<table class="campaign-table">
+    <thead>
+        <tr>
+            <th (click)="sortCampaigns('campaignName')" [class.active]="sortColumn === 'campaignName'">
+                Name
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignName' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th (click)="sortCampaigns('campaignDescription')" [class.active]="sortColumn === 'campaignDescription'">
+                Description
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignDescription' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th (click)="sortCampaigns('campaignLocation')" [class.active]="sortColumn === 'campaignLocation'">
+                Location
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignLocation' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th (click)="sortCampaigns('campaignCity')" [class.active]="sortColumn === 'campaignCity'">
+                City
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignCity' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th (click)="sortCampaigns('campaignCountry')" [class.active]="sortColumn === 'campaignCountry'">
+                Country
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignCountry' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th (click)="sortCampaigns('campaignGoalAmount')" [class.active]="sortColumn === 'campaignGoalAmount'">
+                Goal Amount
+                <span class="sort-arrow">
+                    {{ sortColumn === 'campaignGoalAmount' ? (sortDirection === 'asc' ? '▲' : '▼') : '' }}
+                </span>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let campaign of sortedCampaigns">
+            <td>{{ campaign.campaignName }}</td>
+            <td>{{ campaign.campaignDescription }}</td>
+            <td>{{ campaign.campaignLocation }}</td>
+            <td>{{ campaign.campaignCity }}</td>
+            <td>{{ campaign.campaignCountry }}</td>
+            <td>{{ campaign.campaignGoalAmount | currency }}</td>
+            <td style="display: flex; gap: 10px;">
+                <button class="btn btn-secondary" [routerLink]="['/campaign', campaign.id]" title="Edit">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn btn-danger" (click)="deleteCampaign(campaign.id)" title="Delete">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
